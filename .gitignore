@@ -17,4 +17,23 @@
 ###> symfony/phpunit-bridge ###
 .phpunit.result.cache
 /phpunit.xml
-###< symfony/phpunit-bridge ###
+
+# Email delivery logs
+/app/spool/*
+
+# Parameters
+/app/config/parameters.yml
+/app/config/parameters.ini
+
+# Managed by Composer
+/composer.phar
+
+# Assets and user uploads
+/web/css/*
+/web/js/*
+
+# Build data
+/build/
+
+# Composer PHAR
+/composer.phar
