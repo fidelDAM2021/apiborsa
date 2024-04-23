@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Currículum{% endblock %}
+
+{% block body %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+</style>
+{% form_theme form 'bootstrap_5_layout.html.twig' %}
+<div class="container-fluid">
+    <h3>{{ title }}</h3>
+    {{ form_start(form) }}
+    <div class="form-group row">
+        <div class="col-sm-6">
+        {{ form_row(form.alumne) }}
+        </div>
+    </div>
+    <div class="form-group row">
+        <div class="col-sm-6">
+        {{ form_row(form.experiencia) }}
+        </div>
+        <div class="col-sm-6">
+        {{ form_row(form.idiomes) }}
+        </div>
+    </div>
+    <div class="form-group row">
+        <div class="col-sm-6">
+        {{ form_row(form.estudis) }}
+        </div>
+        <div class="col-sm-6">
+        {{ form_row(form.competencies) }}
+        </div>
+        </div>
+    </div>
+    <div class="form-group row">
+        <div class="col-sm-6">
+        {{ form_row(form.pdf) }}
+        </div>
+        <div class="col-sm-2">
+        {% if hasPDF %} 
+            <a class="btn btn-success" href="{{ path('app_download_student',{id:idAlumne}) }}" role="button">Baixar PDF</a></td>
+        {% endif %}
+        </div>
+    </div>
+    
+    {{ form_end(form) }}
+</div>
+{% endblock %}

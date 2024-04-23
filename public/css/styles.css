@@ -1,0 +1,7 @@
+.aceptar { background-color:blue;font-weight:bold;color:white;
+            width:90px;font-size:small;margin:0px 4px;padding:4px;}
+.cancelar { background-color:crimson;font-weight:bold;color:white;
+            width:90px;font-size:small;margin:0px 4px;padding:4px;}
+td a.btn { font-weight:bold;color:white;font-size:11px;padding:3px;}
+td {font-size:small;}
+form label {font-weight:bold;color:navy;}

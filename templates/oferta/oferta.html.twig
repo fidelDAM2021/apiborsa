@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Oferta{% endblock %}
+
+{% block body %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+</style>
+<h2>Oferta</h2>
+<div class="container-fluid">
+    {% if oferta %}
+        <dl class="row">
+        <dt class="col-sm-1">Data:</dt>
+        <dd class="col-sm-1">{{ oferta.data | date("d/m/y") }}</dd>
+        <dt class="col-sm-1">Empresa:</dt>
+        <dd class="col-sm-3">{{ oferta.NIFempresa.nom }}</dd>
+        <dt class="col-sm-1">Estat:</dt>
+        <dd class="col-sm-1">
+        {% if oferta.estat is same as (true) %}
+            Activada
+        {% elseif value is same as (false) %}
+            Desactivada
+        {% endif %}</dd>
+        </dl>
+        <dl class="row">
+        <dt class="col-sm-3">Text oferta</dt>
+        <dt class="col-sm-3">Experiència</dt>
+        <dt class="col-sm-3">Idiomes</dt>
+        <dt class="col-sm-3">Altres</dt>
+        </dl>
+        <dl class="row">
+        <dd class="col-sm-3">{{ oferta.textoferta }}</dd>
+        <dd class="col-sm-3">{{ oferta.experiencia }}</dd>
+        <dd class="col-sm-3">{{ oferta.idiomes }}</dd>
+        <dd class="col-sm-3">{{ oferta.altres }}</dd>
+        </dl>
+        <dl class="row">
+        <dt class="col-sm-1">Cicles:</dt>
+        {% for cicle in oferta.cicle %}
+            {{ cicle.nomcicle }} 
+        {% endfor %}
+        </dl>
+    {% else %}
+        <h3>No hi ha dades</h3>
+    {% endif %}
+    <a href='{{ oferta.urloferta }}' target='_blank'>Anar a la web</a><br/>
+    <a href='{{ path("app_search_ofertes") }}'>Tornar a ofertes</a>
+    <br/><br/>
+</div>
+{% endblock %}
