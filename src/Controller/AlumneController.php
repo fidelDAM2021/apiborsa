@@ -307,6 +307,7 @@ class AlumneController extends AbstractController
                 'error' => "No existeix l'arxiu",
             ];
             $httpCode=500;
+            return new JsonResponse($response,$httpCode);
         }
         else {
         $response->headers->set('Content-type', 'application/pdf');
@@ -316,7 +317,7 @@ class AlumneController extends AbstractController
         $response->headers->set('Content-Transfer-Encoding', 'binary');
         $response->headers->set('Pragma', 'no-cache');
         $response->headers->set('Expires', '0');
-        }
         return $response;
+        }
     }
 }
