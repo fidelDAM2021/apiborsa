@@ -19,6 +19,17 @@ use Throwable;
 #[Route('api/alumne')]
 class AlumneController extends AbstractController
 {
+    #[Rest\Get('/welcome/', name: 'app_welcome')]
+    public function welcomeStudents(ManagerRegistry $doctrine): JsonResponse
+    {
+        $httpCode=200;
+        $response = [
+                'ok' => true,
+                'error' => 'No hi ha alumnes',
+            ];
+        return new JsonResponse($response,$httpCode);
+    }
+
     #[Rest\Get('/', name: 'app_search_students')]
     public function searchStudents(ManagerRegistry $doctrine): JsonResponse
     {
@@ -290,9 +301,14 @@ class AlumneController extends AbstractController
     
         // Comprueba si el archivo existe antes de intentar descargarlo
         if (!file_exists($filePath)) {
-            throw $this->createNotFoundException('El archivo no existe.');
+            //throw $this->createNotFoundException('El archivo no existe.');
+            $response = [
+                'ok' => false,
+                'error' => "No existeix l'arxiu",
+            ];
+            $httpCode=500;
         }
-    
+        else {
         $response->headers->set('Content-type', 'application/pdf');
         $response->headers->set('Content-Disposition', sprintf('attachment; filename="%s"', $fileName));
         $response->setContent(file_get_contents($filePath));
@@ -300,7 +316,7 @@ class AlumneController extends AbstractController
         $response->headers->set('Content-Transfer-Encoding', 'binary');
         $response->headers->set('Pragma', 'no-cache');
         $response->headers->set('Expires', '0');
-    
+        }
         return $response;
     }
 }
