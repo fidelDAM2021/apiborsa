@@ -295,6 +295,7 @@ class AlumneController extends AbstractController
 
     #[Rest\Get('/download/{id}', name: 'app_download_student')]
     public function downloadAction($id) {
+        try {
         $filePath = $this->getParameter('curriculums_directory'). "/" . $id. ".pdf";
         $fileName = basename($filePath);
         $response = new Response();
@@ -318,6 +319,15 @@ class AlumneController extends AbstractController
         $response->headers->set('Pragma', 'no-cache');
         $response->headers->set('Expires', '0');
         return $response;
+        }
+        } catch (Throwable $e) {
+            $response = [
+                'ok' => false,
+                'error' => "Error en descarregar l'arxiu",
+                'message'=>$e->getMessage()
+            ];
+            $httpCode=500;
+            return new JsonResponse($response,$httpCode);
         }
     }
 }
